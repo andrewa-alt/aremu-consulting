@@ -1,42 +1,33 @@
 /** @type {import('tailwindcss').Config} */
-const config = {
+const {fontFamily} = require("tailwindcss/defaultTheme")
+
+module.exports = {
+  darkMode: ["class"],
   content: [
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/**/*.{js,ts,jsx,tsx,mdx}',
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  darkMode: ['class'],
+  prefix: "",
   theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
     extend: {
-      colors: {
-        primary: { // Nested structure for colors
-          DEFAULT: '#0a0a0a', // Near-black background
-          bg: '#0a0a0a', // Near-black background
-        },
-        secondary: {
-          DEFAULT: '#141414', // Slightly lighter for depth
-          bg: '#141414',
-        },
-        text: {
-          primary: '#fafafa', // Warm white text
-          secondary: '#a1a1a1', // Muted text
-        },
-        accent: {
-          DEFAULT: '#b87333', // Copper accent
-          hover: '#d48544', // Lighter accent for hover states
-        },
-      },
       fontFamily: {
-        display: ['"Cormorant Garamond"', 'serif'], 
-        body: ['"Plus Jakarta Sans"', 'sans-serif'], 
+        display: ["'Cormorant Garamond'", "serif"],
+        body: ["'Plus Jakarta Sans'", "sans-serif"],
+        sans: ["'Plus Jakarta Sans'", ...fontFamily.sans],
       },
-      fontSize: { 
-        'display-xl': ['6rem', { lineHeight: '1.15', fontWeight: '700' }], 
-        'display-lg': ['4rem', { lineHeight: '1.15', fontWeight: '700' }], 
-        'display-md': ['3rem', { lineHeight: '1.15', fontWeight: '600' }],
-        'body-lg': ['1.125rem', { lineHeight: '1.75', fontWeight: '400' }],
-        'body-md': ['1rem', { lineHeight: '1.75', fontWeight: '400' }],
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
         "accordion-down": {
@@ -54,10 +45,5 @@ const config = {
       },
     },
   },
-  plugins: [
-    require('tailwindcss-animate'),
-    require('@tailwindcss/typography'),
-  ],
+  plugins: [],
 }
-
-module.exports = config;

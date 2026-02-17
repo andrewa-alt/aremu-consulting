@@ -1,44 +1,56 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 /* Import Google Fonts */
-@layer base {
-  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
-}
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 
-/* Apply base styles */
+/* Apply base styles using standard Tailwind classes and inline styles where necessary */
 body {
-  @apply bg-primary text-text-primary font-body antialiased; /* Use theme.colors.primary for background */
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #0a0a0a; /* Near-black background */
+  color: #fafafa; /* Warm white text */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  @apply font-display text-text-primary;
-}
-
-/* Utility to apply font stacks directly */
-.font-display {
   font-family: 'Cormorant Garamond', serif;
-}
-
-.font-body {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-}
-
-/* Specific element styling could go here */
-.hero-title {
-  @apply text-display-xl font-bold leading-tight mb-6; 
-}
-
-.section-title {
-  @apply text-display-lg font-bold;
-}
-
-.section-subtitle {
-  @apply text-body-lg text-text-secondary;
+  color: #fafafa;
 }
 
 /* Ensure smooth transitions for interactive elements */
 button, a, input, [role="button"], [role="link"] {
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Custom theme configuration for Tailwind v4 */
+@theme {
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  
+  /* Custom colors */
+  --color-accent: #f97316; /* orange-500 */
+  --color-primary: #0a0a0a; /* near-black */
+  --color-secondary: #141414; /* lighter black */
+  
+  /* Container */
+  --container-center: true;
+  --container-padding: 2rem;
+  
+  /* Border radius */
+  --radius: 0.5rem;
+  
+  /* Animations */
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+}
+
+/* CSS-based animations for accordion */
+@keyframes accordion-down {
+  from { height: 0; }
+  to { height: var(--radix-accordion-content-height); }
+}
+
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to { height: 0; }
 }
