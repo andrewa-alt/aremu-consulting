@@ -1,21 +1,8 @@
 'use client';
 
-import { siteConfig } from '@/config/site';
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { MoveRight, Leaf, Zap, Shield, ArrowDown } from 'lucide-react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
-
-// FAQ data
-const mockFAQ = [
-  { q: "What services does Aremu Consulting provide?", a: "We specialize in building and managing critical business systems, from marketing infrastructure to process automation. We also manage sustainable agribusiness ventures in Nigeria." },
-  { q: "Do you work with international clients?", a: "Yes, we work remotely with clients globally, particularly those needing robust systems and strategic infrastructure support." },
-  { q: "What technologies do you use?", a: "We use modern tools including Next.js, React, n8n for automation, Google Workspace, and various cloud services tailored to each project's needs." },
-  { q: "How can I get started?", a: "Simply reach out via email at segun.a@aremuconsulting.com with your project details, and we'll schedule a consultation to discuss your needs." },
-];
+import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { ArrowDown } from 'lucide-react';
 
 // Animation variants
 const containerVariants = {
@@ -41,42 +28,6 @@ const itemVariants = {
   },
 };
 
-const scaleVariants = {
-  hidden: { opacity: 0, scale: 0.9 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      duration: 0.6,
-      ease: [0.16, 1, 0.3, 1] as const,
-    },
-  },
-};
-
-const slideInLeft = {
-  hidden: { opacity: 0, x: -60 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.8,
-      ease: [0.16, 1, 0.3, 1] as const,
-    },
-  },
-};
-
-const slideInRight = {
-  hidden: { opacity: 0, x: 60 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.8,
-      ease: [0.16, 1, 0.3, 1] as const,
-    },
-  },
-};
-
 function ScrollReveal({ children, className, delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   return (
     <motion.div
@@ -91,27 +42,10 @@ function ScrollReveal({ children, className, delay = 0 }: { children: React.Reac
   );
 }
 
-function ParallaxSection({ children, className }: { children: React.ReactNode; className?: string }) {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  });
-  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
-
-  return (
-    <div ref={ref} className={className}>
-      <motion.div style={{ y }}>
-        {children}
-      </motion.div>
-    </div>
-  );
-}
-
 export default function HomePage() {
   return (
     <main className="grain gradient-mesh min-h-screen">
-      {/* Hero Section - Dramatic Full-Height with Floating Elements */}
+      {/* Hero Section */}
       <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Animated background orbs */}
         <motion.div 
@@ -148,130 +82,66 @@ export default function HomePage() {
             ease: "easeInOut",
           }}
         />
-        <motion.div 
-          className="absolute top-1/2 right-1/3 w-64 h-64 rounded-full"
-          style={{
-            background: 'radial-gradient(circle, rgba(255,107,53,0.08) 0%, transparent 70%)',
-            filter: 'blur(40px)',
-          }}
-          animate={{
-            x: [0, 40, 0],
-            y: [0, 40, 0],
-          }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
 
-        {/* Geometric accent lines */}
-        <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-20" xmlns="http://www.w3.org/2000/svg">
-          <motion.line
-            x1="10%" y1="20%" x2="30%" y2="40%"
-            stroke="rgba(255,107,53,0.3)"
-            strokeWidth="1"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 2, delay: 1 }}
-          />
-          <motion.line
-            x1="85%" y1="15%" x2="70%" y2="35%"
-            stroke="rgba(255,107,53,0.2)"
-            strokeWidth="1"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 2, delay: 1.3 }}
-          />
-          <motion.circle
-            cx="15%" cy="75%" r="60"
-            stroke="rgba(255,107,53,0.15)"
-            strokeWidth="1"
-            fill="none"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 3, delay: 0.5 }}
-          />
-        </svg>
-
-        {/* Hero Content */}
         <motion.div 
           className="container mx-auto px-6 relative z-10 text-center"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          {/* Badge */}
           <motion.div variants={itemVariants}>
-            <span className="inline-block px-4 py-2 rounded-full glass text-sm font-medium text-accent mb-8 border border-accent/20">
-              {siteConfig.hero.badge}
-            </span>
+            <div className="inline-block p-4 rounded-2xl glass glow mb-8 animate-float">
+              <Image 
+                src="/images/acl-logo.png" 
+                alt="ACL Logo" 
+                width={80} 
+                height={80} 
+                className="rounded-xl"
+              />
+            </div>
           </motion.div>
 
-          {/* Main Title - Split for dramatic effect */}
           <motion.h1 
-            className="text-6xl md:text-8xl lg:text-9xl font-bold mb-6 font-['Cormorant_Garamond'] leading-[0.9]"
+            className="text-5xl md:text-7xl font-bold mb-6 leading-tight"
             variants={itemVariants}
           >
-            <span className="block text-white">{siteConfig.hero.title.split(' ')[0]}</span>
-            <motion.span 
-              className="block gradient-text"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            >
-              {siteConfig.hero.title.split(' ').slice(1).join(' ')}
-            </motion.span>
+            Infrastructure That{' '}
+            <span className="gradient-text">Just Works</span>
           </motion.h1>
 
-          {/* Subtitle */}
           <motion.p 
-            className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12 font-['Plus_Jakarta_Sans'] leading-relaxed"
+            className="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto mb-10"
             variants={itemVariants}
           >
-            {siteConfig.hero.subtitle}
+            Eliminating technical pain points for SMBs — one streamlined system at a time.
           </motion.p>
 
-          {/* CTA Buttons */}
           <motion.div 
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
             variants={itemVariants}
           >
-            <motion.div
+            <motion.a
+              href="#contact"
+              className="px-8 py-4 bg-accent hover:bg-accent/80 rounded-xl font-semibold transition-all duration-300 animate-pulse-glow text-white"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
             >
-              <Button 
-                asChild 
-                size="lg" 
-                className="bg-accent text-white hover:bg-accent/90 px-8 py-6 text-lg font-semibold rounded-xl animate-pulse-glow"
-              >
-                <a href={siteConfig.hero.cta.href}>
-                  {siteConfig.hero.cta.text} <MoveRight className="ml-2 h-5 w-5" />
-                </a>
-              </Button>
-            </motion.div>
-            <motion.div
+              Book a Consultation
+            </motion.a>
+            <motion.a
+              href="#portfolio"
+              className="px-8 py-4 glass hover:bg-white/5 rounded-xl font-semibold transition-all duration-300 text-white border border-white/20"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
             >
-              <Button 
-                asChild 
-                variant="outline" 
-                size="lg" 
-                className="text-white border-white/20 hover:bg-white/5 hover:border-white/40 px-8 py-6 text-lg rounded-xl backdrop-blur-sm"
-              >
-                <a href={siteConfig.hero.secondaryCta.href}>
-                  {siteConfig.hero.secondaryCta.text}
-                </a>
-              </Button>
-            </motion.div>
+              View My Work
+            </motion.a>
           </motion.div>
         </motion.div>
 
         {/* Scroll indicator */}
         <motion.div 
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-gray-500"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.5, duration: 0.8 }}
@@ -279,7 +149,7 @@ export default function HomePage() {
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="flex flex-col items-center gap-2 text-gray-500"
+            className="flex flex-col items-center gap-2"
           >
             <span className="text-xs uppercase tracking-widest">Scroll</span>
             <ArrowDown className="w-4 h-4" />
@@ -287,46 +157,42 @@ export default function HomePage() {
         </motion.div>
       </section>
 
-      {/* Services Section with Scroll Reveals */}
-      <section id="services" className="py-24 md:py-32 relative">
+      {/* Services Section */}
+      <section id="services" className="py-24 relative">
         <div className="container mx-auto px-6">
           <ScrollReveal className="text-center mb-16">
-            <span className="inline-block px-3 py-1 rounded-full glass text-xs font-medium text-accent mb-4 border border-accent/20 uppercase tracking-wider">
-              What We Do
-            </span>
-            <h2 className="text-4xl md:text-6xl font-bold text-white mb-4 font-['Cormorant_Garamond']">
-              Strategic Pillars
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              What I Build
             </h2>
-            <p className="text-lg text-gray-400 max-w-2xl mx-auto font-['Plus_Jakarta_Sans']">
-              Where essential systems meet visionary growth. Explore the core of our offerings.
+            <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+              Practical solutions that solve real business problems
             </p>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {siteConfig.features.map((feature, index) => (
+          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            {[
+              { icon: '📊', title: 'Spreadsheet Systems', desc: 'Custom spreadsheet solutions that bring clarity to chaos. Multi-user, real-time, automated.', tags: ['Real-time Sync', 'Custom Dashboards', 'Automated Reports'] },
+              { icon: '🖥️', title: 'Dashboard Development', desc: 'Executive-ready dashboards that turn raw data into instant insights.', tags: ['Beautiful UI', 'Live Data', 'Mobile Ready'] },
+              { icon: '⚡', title: 'Workflow Automation', desc: "Eliminate manual work. Automations that run 24/7, so you don't have to.", tags: ['Email Processing', 'Data Sync', 'Smart Routing'] },
+              { icon: '🔧', title: 'Custom Solutions', desc: 'Built to fit your exact business needs. You own everything.', tags: ['Tailored to You', 'Full Documentation', 'Ongoing Support'] },
+            ].map((service, index) => (
               <ScrollReveal key={index} delay={index * 0.1}>
                 <motion.div
-                  whileHover={{ y: -10, transition: { duration: 0.3 } }}
-                  className="h-full"
+                  whileHover={{ y: -10 }}
+                  className="p-8 glass rounded-2xl hover:glow transition-all duration-300 group h-full"
                 >
-                  <Card className="h-full bg-[#141414]/50 border border-white/10 backdrop-blur-sm hover:border-accent/30 transition-all duration-500 group">
-                    <CardHeader>
-                      <motion.div 
-                        className="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors duration-500"
-                        whileHover={{ rotate: 5, scale: 1.1 }}
-                      >
-                        <feature.icon className="w-7 h-7 text-accent" />
-                      </motion.div>
-                      <CardTitle className="text-2xl font-bold text-white font-['Cormorant_Garamond']">
-                        {feature.title}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-gray-400 font-['Plus_Jakarta_Sans'] leading-relaxed">
-                        {feature.description}
-                      </p>
-                    </CardContent>
-                  </Card>
+                  <div className="text-4xl mb-4">{service.icon}</div>
+                  <h3 className="text-2xl font-bold mb-3 group-hover:text-accent transition-colors text-white">
+                    {service.title}
+                  </h3>
+                  <p className="text-gray-400 mb-4">{service.desc}</p>
+                  <ul className="flex flex-wrap gap-2">
+                    {service.tags.map((tag, i) => (
+                      <li key={i} className="text-sm px-3 py-1 bg-accent/10 rounded-full text-accent">
+                        {tag}
+                      </li>
+                    ))}
+                  </ul>
                 </motion.div>
               </ScrollReveal>
             ))}
@@ -334,131 +200,292 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* About Section with Parallax */}
-      <section id="about" className="py-24 md:py-32 relative overflow-hidden">
+      {/* Portfolio / Case Studies Section */}
+      <section id="portfolio" className="py-24 bg-gradient-to-b from-dark via-card/30 to-dark">
         <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -60 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <span className="inline-block px-3 py-1 rounded-full glass text-xs font-medium text-accent mb-4 border border-accent/20 uppercase tracking-wider">
-                About Us
-              </span>
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 font-['Cormorant_Garamond']">
-                About Aremu Consulting
-              </h2>
-              <p className="text-lg text-gray-400 mb-6 font-['Plus_Jakarta_Sans'] leading-relaxed">
-                We are dedicated to building and managing critical systems for businesses, focusing on efficiency, security, and strategic growth. With a focus on foundational infrastructure and forward-thinking ventures, we empower our clients to achieve lasting impact.
-              </p>
-              <p className="text-base text-gray-400 font-['Plus_Jakarta_Sans'] leading-relaxed">
-                Our roots in hands-on system development and a pragmatic approach ensure that we deliver solutions that are not just advanced, but also robust and reliable. From optimizing marketing infrastructure to developing sustainable agro-businesses, we bring a unique blend of technical depth and strategic vision.
-              </p>
-            </motion.div>
+          <ScrollReveal className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              Case Studies
+            </h2>
+            <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+              Real projects. Real results.
+            </p>
+          </ScrollReveal>
 
-            <motion.div
-              initial={{ opacity: 0, x: 60 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="relative"
-            >
-              <motion.div 
-                className="relative w-80 h-80 mx-auto"
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.5 }}
-              >
-                {/* Decorative rings */}
-                <motion.div
-                  className="absolute inset-0 rounded-full border border-accent/20"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                />
-                <motion.div
-                  className="absolute inset-4 rounded-full border border-accent/10"
-                  animate={{ rotate: -360 }}
-                  transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                />
-                {/* Main circle */}
-                <div className="absolute inset-8 rounded-full bg-gradient-to-br from-accent/20 to-purple-500/20 flex items-center justify-center backdrop-blur-sm border border-white/10">
-                  <span className="text-7xl font-bold text-white font-['Cormorant_Garamond']">AC</span>
+          <div className="space-y-24 max-w-6xl mx-auto">
+            {/* CAS Claim Tracker */}
+            <ScrollReveal>
+              <div className="glass rounded-3xl p-8 md:p-12">
+                <div className="flex flex-wrap items-center gap-4 mb-8">
+                  <span className="px-4 py-1 bg-accent/20 text-accent rounded-full text-sm font-medium">
+                    Instant Marketing
+                  </span>
+                  <h3 className="text-3xl font-bold text-white">CAS Claim Tracker System</h3>
                 </div>
-              </motion.div>
-            </motion.div>
+
+                <div className="grid md:grid-cols-2 gap-8 mb-8">
+                  <div>
+                    <h4 className="text-lg font-semibold text-red-400 mb-2 flex items-center gap-2">
+                      <span>⚠️</span> The Problem
+                    </h4>
+                    <p className="text-gray-400">
+                      Manual tracking across 8 agents, inconsistent data, payroll errors, and zero visibility into performance. Management was flying blind.
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-semibold text-green-400 mb-2 flex items-center gap-2">
+                      <span>✅</span> The Solution
+                    </h4>
+                    <p className="text-gray-400">
+                      A complete claims management ecosystem with individual agent trackers, centralised reporting, and automated commission calculations — all working together seamlessly.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mb-8">
+                  <h4 className="text-lg font-semibold text-accent mb-3 flex items-center gap-2">
+                    <span>📈</span> Results
+                  </h4>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {['Zero data entry errors', 'Real-time visibility', 'Payroll streamlined', 'Performance leaderboards'].map((result, i) => (
+                      <div key={i} className="p-4 bg-green-500/10 border border-green-500/20 rounded-xl text-center">
+                        <span className="text-sm text-green-400">{result}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <h4 className="text-lg font-semibold text-white mb-4">Project Gallery</h4>
+                <div className="relative">
+                  <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent" style={{ width: 'calc(100% + 2rem)' }}>
+                    {[
+                      '/images/cas-tracker/Agent personal tracker - Agent Input Page.jpg',
+                      '/images/cas-tracker/Agent personal tracker - Leaderboard Page.jpg',
+                      '/images/cas-tracker/Main Campaign Tracker - Main tracker page_ pulls all Agent personal tracker claim data into one place.jpg',
+                      '/images/cas-tracker/Main Campaign Tracker - Data Page_ puts all agent data together.jpg',
+                      '/images/cas-tracker/Main Campaign Tracker - Leaderboard Page_ generates the leaderboard, agents personal tracker - leaderboard page is pulled directly from here.jpg',
+                      '/images/cas-tracker/Main Campaign Tracker - Comms Page. used for payroll purposes to calculate commision to be payed to each agent.jpg',
+                    ].map((src, i) => (
+                      <div key={i} className="relative flex-shrink-0 w-80 h-48 md:w-96 md:h-56 bg-card rounded-xl overflow-hidden group">
+                        <Image
+                          src={src}
+                          alt={`Project screenshot ${i + 1}`}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-center text-white/70 text-sm mt-2">← Scroll to see more →</p>
+                </div>
+              </div>
+            </ScrollReveal>
+
+            {/* Vibe Performance Dashboard */}
+            <ScrollReveal delay={0.2}>
+              <div className="glass rounded-3xl p-8 md:p-12">
+                <div className="flex flex-wrap items-center gap-4 mb-8">
+                  <span className="px-4 py-1 bg-accent/20 text-accent rounded-full text-sm font-medium">
+                    Instant Marketing
+                  </span>
+                  <h3 className="text-3xl font-bold text-white">Vibe Performance Dashboard</h3>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-8 mb-8">
+                  <div>
+                    <h4 className="text-lg font-semibold text-red-400 mb-2 flex items-center gap-2">
+                      <span>⚠️</span> The Problem
+                    </h4>
+                    <p className="text-gray-400">
+                      Raw spreadsheets that were impossible to interpret at executive level. No way to see daily performance across campaigns without digging through tabs.
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-semibold text-green-400 mb-2 flex items-center gap-2">
+                      <span>✅</span> The Solution
+                    </h4>
+                    <p className="text-gray-400">
+                      A premium, real-time business intelligence dashboard with a sleek dark-mode interface — instant pulse checks on campaign performance.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mb-8">
+                  <h4 className="text-lg font-semibold text-accent mb-3 flex items-center gap-2">
+                    <span>📈</span> Results
+                  </h4>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {['Instant KPI visibility', 'Executive-ready UI', 'Mobile responsive', 'Live sync indicator'].map((result, i) => (
+                      <div key={i} className="p-4 bg-green-500/10 border border-green-500/20 rounded-xl text-center">
+                        <span className="text-sm text-green-400">{result}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <h4 className="text-lg font-semibold text-white mb-4">Project Gallery</h4>
+                <div className="relative">
+                  <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent" style={{ width: 'calc(100% + 2rem)' }}>
+                    {[
+                      '/images/dashboard/dashboard secure log in first page.png',
+                      '/images/dashboard/dash board now using google sheets as a back end 1-3.jpg',
+                      '/images/dashboard/dash board now using google sheets as a back end 2-3.jpg',
+                      '/images/dashboard/dash board now using google sheets as a back end 3-3.jpg',
+                      '/images/dashboard/performance sheet before creatig app dashboard viewer pt 1-2.jpg',
+                      '/images/dashboard/performance sheet before creatig app dashboard viewer pt 2-2.jpg',
+                    ].map((src, i) => (
+                      <div key={i} className="relative flex-shrink-0 w-80 h-48 md:w-96 md:h-56 bg-card rounded-xl overflow-hidden group">
+                        <Image
+                          src={src}
+                          alt={`Project screenshot ${i + 1}`}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-center text-white/70 text-sm mt-2">← Scroll to see more →</p>
+                </div>
+              </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section id="faq" className="py-24 md:py-32 relative">
-        <div className="container mx-auto px-6 max-w-4xl">
-          <ScrollReveal className="text-center mb-16">
-            <span className="inline-block px-3 py-1 rounded-full glass text-xs font-medium text-accent mb-4 border border-accent/20 uppercase tracking-wider">
-              FAQ
-            </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 font-['Cormorant_Garamond']">
-              Frequently Asked Questions
-            </h2>
-          </ScrollReveal>
+      {/* About Section */}
+      <section id="about" className="py-24">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto">
+            <ScrollReveal className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+                From Messy to Streamlined
+              </h2>
+              <p className="text-lg text-gray-400">My process is simple and effective</p>
+            </ScrollReveal>
 
-          <ScrollReveal delay={0.2}>
-            <Accordion type="single" collapsible className="w-full space-y-4">
-              {mockFAQ.map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1, duration: 0.5 }}
-                >
-                  <AccordionItem 
-                    value={`item-${index}`} 
-                    className="border border-white/10 rounded-xl px-6 bg-[#141414]/30 backdrop-blur-sm data-[state=open]:border-accent/30 transition-colors"
-                  >
-                    <AccordionTrigger className="text-white hover:text-accent text-left text-lg font-semibold py-5 hover:no-underline font-['Plus_Jakarta_Sans']">
-                      {item.q}
-                    </AccordionTrigger>
-                    <AccordionContent className="text-gray-400 pb-5 font-['Plus_Jakarta_Sans'] leading-relaxed">
-                      {item.a}
-                    </AccordionContent>
-                  </AccordionItem>
-                </motion.div>
+            <div className="grid md:grid-cols-4 gap-6">
+              {[
+                { num: '01', title: 'Discovery', desc: 'Understand your pain points and current workflows' },
+                { num: '02', title: 'Design', desc: 'Architecture that fits how you already work' },
+                { num: '03', title: 'Build', desc: 'Clean, documented, maintainable systems' },
+                { num: '04', title: 'Deploy', desc: 'You own it. No vendor lock-in.' },
+              ].map((step, index) => (
+                <ScrollReveal key={index} delay={index * 0.1}>
+                  <div className="text-center group">
+                    <div className="text-5xl font-bold text-accent/20 group-hover:text-accent/40 transition-colors mb-4">
+                      {step.num}
+                    </div>
+                    <h3 className="text-xl font-bold mb-2 text-white">{step.title}</h3>
+                    <p className="text-gray-400 text-sm">{step.desc}</p>
+                  </div>
+                </ScrollReveal>
               ))}
-            </Accordion>
-          </ScrollReveal>
+            </div>
+
+            <ScrollReveal delay={0.4}>
+              <div className="mt-16 p-8 glass rounded-2xl text-center">
+                <h3 className="text-2xl font-bold mb-4 text-white">Why Work With Me?</h3>
+                <div className="grid md:grid-cols-3 gap-6 text-gray-400">
+                  <div>
+                    <div className="text-3xl mb-2">🎯</div>
+                    <p><strong className="text-white">Practical Solutions</strong><br/>I build what you actually need, not what looks good on a proposal</p>
+                  </div>
+                  <div>
+                    <div className="text-3xl mb-2">🔓</div>
+                    <p><strong className="text-white">You Own Everything</strong><br/>No vendor lock-in. Full documentation. Your data, your systems.</p>
+                  </div>
+                  <div>
+                    <div className="text-3xl mb-2">⚡</div>
+                    <p><strong className="text-white">Fast Delivery</strong><br/>Working systems in weeks, not months. I test fast and iterate.</p>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-24 md:py-32 relative">
+      <section id="contact" className="py-24 bg-gradient-to-b from-dark via-primary/10 to-dark">
         <div className="container mx-auto px-6">
           <ScrollReveal className="text-center max-w-2xl mx-auto">
-            <span className="inline-block px-3 py-1 rounded-full glass text-xs font-medium text-accent mb-4 border border-accent/20 uppercase tracking-wider">
-              Get In Touch
-            </span>
-            <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 font-['Cormorant_Garamond']">
-              Let&apos;s Build Something
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              Let&apos;s Talk
             </h2>
-            <p className="text-lg text-gray-400 mb-10 font-['Plus_Jakarta_Sans']">
-              Ready to optimize your infrastructure or explore new growth avenues? Contact us for a consultation.
+            <p className="text-lg text-gray-400 mb-12">
+              Tell me about your biggest technical pain point
             </p>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-              className="inline-block"
-            >
-              <Button 
-                asChild 
-                size="lg" 
-                className="bg-accent text-white hover:bg-accent/90 px-10 py-6 text-lg font-semibold rounded-xl animate-pulse-glow"
+
+            <form className="space-y-6 text-left" action="https://formsubmit.co/segun.a@aremuconsulting.com" method="POST">
+              <input type="text" style={{ display: 'none' }} name="_honey" />
+              <input type="hidden" name="_subject" value="New enquiry from Aremu Consulting website" />
+              
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-medium mb-2 text-white">Name</label>
+                  <input 
+                    type="text" 
+                    required 
+                    name="name"
+                    className="w-full px-4 py-3 bg-card border border-white/10 rounded-xl focus:border-accent focus:outline-none transition-colors text-white"
+                    placeholder="Your name"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2 text-white">Email</label>
+                  <input 
+                    type="email" 
+                    required 
+                    name="email"
+                    className="w-full px-4 py-3 bg-card border border-white/10 rounded-xl focus:border-accent focus:outline-none transition-colors text-white"
+                    placeholder="you@company.com"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium mb-2 text-white">Business Type</label>
+                <select 
+                  name="industry"
+                  className="w-full px-4 py-3 bg-card border border-white/10 rounded-xl focus:border-accent focus:outline-none transition-colors text-white"
+                >
+                  <option value="">Select your industry</option>
+                  <option value="marketing">Marketing / Advertising</option>
+                  <option value="insurance">Insurance / Claims</option>
+                  <option value="realestate">Real Estate</option>
+                  <option value="ecommerce">E-commerce / Retail</option>
+                  <option value="professional">Professional Services</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium mb-2 text-white">What&apos;s your biggest pain point?</label>
+                <textarea 
+                  name="message"
+                  required 
+                  rows={4}
+                  className="w-full px-4 py-3 bg-card border border-white/10 rounded-xl focus:border-accent focus:outline-none transition-colors resize-none text-white"
+                  placeholder="Describe the problem you need solved..."
+                />
+              </div>
+
+              <motion.button 
+                type="submit"
+                className="w-full py-4 bg-accent hover:bg-accent/80 rounded-xl font-semibold transition-all duration-300 text-white"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
-                <a href="mailto:segun.a@aremuconsulting.com">
-                  Start a Conversation <MoveRight className="ml-2 h-5 w-5" />
-                </a>
-              </Button>
-            </motion.div>
+                Send Message
+              </motion.button>
+            </form>
+
+            <p className="mt-8 text-gray-400 text-sm">
+              Or email me directly:{' '}
+              <a href="mailto:segun.a@aremuconsulting.com" className="text-accent hover:underline">
+                segun.a@aremuconsulting.com
+              </a>
+            </p>
           </ScrollReveal>
         </div>
       </section>
@@ -466,13 +493,15 @@ export default function HomePage() {
       {/* Footer */}
       <footer className="py-8 border-t border-white/10">
         <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-gray-500 text-sm font-['Plus_Jakarta_Sans']">
-            <p>© 2026 Aremu Consulting. All rights reserved.</p>
-            <p>Built with precision.</p>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-gray-500 text-sm">
+            <div className="flex items-center gap-3">
+              <Image src="/images/acl-logo.png" alt="ACL" width={32} height={32} className="rounded" />
+              <span className="font-semibold text-white">Aremu Consulting Ltd</span>
+            </div>
+            <p>© 2026 Aremu Consulting Ltd. All rights reserved.</p>
           </div>
         </div>
       </footer>
     </main>
   );
 }
-// Force rebuild Tue Feb 17 03:24:55 GMT 2026
