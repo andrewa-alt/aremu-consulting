@@ -171,10 +171,10 @@ export default function HomePage() {
 
           <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
             {[
-              { icon: '📊', title: 'Spreadsheet Systems', desc: 'Custom spreadsheet solutions that bring clarity to chaos. Multi-user, real-time, automated.', tags: ['Real-time Sync', 'Custom Dashboards', 'Automated Reports'] },
-              { icon: '🖥️', title: 'Dashboard Development', desc: 'Executive-ready dashboards that turn raw data into instant insights.', tags: ['Beautiful UI', 'Live Data', 'Mobile Ready'] },
-              { icon: '⚡', title: 'Workflow Automation', desc: "Eliminate manual work. Automations that run 24/7, so you don't have to.", tags: ['Email Processing', 'Data Sync', 'Smart Routing'] },
-              { icon: '🔧', title: 'Custom Solutions', desc: 'Built to fit your exact business needs. You own everything.', tags: ['Tailored to You', 'Full Documentation', 'Ongoing Support'] },
+              { icon: '🏭', title: 'ERP Systems in Google Sheets', desc: 'Full business operations platforms — CRM, inventory, production planning, and logistics. Zero SaaS costs, complete ownership.', tags: ['MealPrep.exe Case Study', 'Custom Apps Script', 'API Integrations'] },
+              { icon: '📊', title: 'Executive Dashboards', desc: 'Real-time business intelligence with premium UI. Transform spreadsheet chaos into boardroom-ready insights.', tags: ['Vibe Dashboard Case Study', 'Live Data Sync', 'Mobile Responsive'] },
+              { icon: '📋', title: 'Claims & Workflow Systems', desc: 'Multi-user tracking systems with automated calculations, leaderboards, and quality control gates.', tags: ['CAS Tracker Case Study', 'Automated Reporting', 'Quality Control'] },
+              { icon: '⚡', title: 'Process Automation', desc: "Eliminate manual data entry and routing decisions. Systems that run 24/7 so your team doesn't have to.", tags: ['Email Processing', 'Smart Routing', 'Zero Manual Work'] },
             ].map((service, index) => (
               <ScrollReveal key={index} delay={index * 0.1}>
                 <motion.div
@@ -197,6 +197,54 @@ export default function HomePage() {
               </ScrollReveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* How I Work - Process Section */}
+      <section id="process" className="py-24 relative">
+        <div className="container mx-auto px-6">
+          <ScrollReveal className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              How I Work
+            </h2>
+            <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+              From chaos to clarity in four steps
+            </p>
+          </ScrollReveal>
+
+          <div className="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+            {[
+              { num: '01', title: 'Discovery', desc: 'Deep dive into your workflows, pain points, and what success looks like' },
+              { num: '02', title: 'Design', desc: 'Blueprint the system architecture — data flows, automations, user experience' },
+              { num: '03', title: 'Build', desc: 'Rapid development with weekly demos. You see progress, not promises' },
+              { num: '04', title: 'Handover', desc: 'Full documentation, training, and you own everything. No vendor lock-in' },
+            ].map((step, index) => (
+              <ScrollReveal key={index} delay={index * 0.1}>
+                <div className="text-center group p-6">
+                  <div className="text-6xl font-bold text-accent/20 group-hover:text-accent/40 transition-colors mb-4">
+                    {step.num}
+                  </div>
+                  <h3 className="text-xl font-bold mb-2 text-white">{step.title}</h3>
+                  <p className="text-gray-400 text-sm">{step.desc}</p>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+
+          <ScrollReveal delay={0.4}>
+            <div className="mt-12 text-center">
+              <p className="text-gray-500 text-sm mb-4">Typical timeline: 2-4 weeks from kickoff to live system</p>
+              <motion.a
+                href="#contact"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-accent/10 hover:bg-accent/20 text-accent rounded-xl font-medium transition-all duration-300"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                Start Your Project
+                <span>→</span>
+              </motion.a>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
