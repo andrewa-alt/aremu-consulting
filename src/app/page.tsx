@@ -535,7 +535,7 @@ export default function HomePage() {
                 <div className="relative">
                   <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent" style={{ width: 'calc(100% + 2rem)' }}>
                     {[
-                      '/images/mealprep-exe/active-orders.jpg',
+                      '/images/mealprep-exe/active-orders-v2.jpg',
                       '/images/mealprep-exe/recipe-page.jpg',
                       '/images/mealprep-exe/nutritional-page.jpg',
                       '/images/mealprep-exe/dispatch-page.jpg',
