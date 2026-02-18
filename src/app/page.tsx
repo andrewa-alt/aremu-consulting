@@ -424,6 +424,7 @@ export default function HomePage() {
             <div className="hidden md:flex items-center gap-8">
               <a href="#services" className="text-sm text-slate-text hover:text-electric transition-colors">Services</a>
               <a href="#projects" className="text-sm text-slate-text hover:text-electric transition-colors">Projects</a>
+              <a href="#automations" className="text-sm text-slate-text hover:text-electric transition-colors">Automations</a>
               <a href="#about" className="text-sm text-slate-text hover:text-electric transition-colors">About</a>
               <a href="#faq" className="text-sm text-slate-text hover:text-electric transition-colors">FAQ</a>
               <Button 
@@ -676,6 +677,189 @@ export default function HomePage() {
                 </motion.div>
               </ScrollReveal>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* n8n Automation Showcase */}
+      <section id="automations" className="py-24 md:py-32 relative">
+        <div className="container mx-auto px-6">
+          <ScrollReveal className="text-center mb-16">
+            <span className="inline-block px-3 py-1 rounded-full glass text-xs font-medium text-electric mb-4 border border-electric/20 uppercase tracking-wider">
+              Automation Engine
+            </span>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              n8n Workflows
+            </h2>
+            <p className="text-lg text-slate-text max-w-2xl mx-auto">
+              Intelligent automations that eliminate manual work and capture every opportunity.
+            </p>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* ACIA */}
+            <ScrollReveal delay={0}>
+              <motion.div
+                whileHover={{ y: -5, transition: { duration: 0.3 } }}
+                className="h-full"
+              >
+                <Card className="h-full bg-navy/50 border border-white/10 backdrop-blur-sm hover:border-electric/30 transition-all duration-500 group overflow-hidden">
+                  <div className="relative h-56 overflow-hidden cursor-pointer" onClick={() => window.open('/images/n8n/accident-claims-intelligent-automator.png', '_blank')}>
+                    <Image
+                      src="/images/n8n/accident-claims-intelligent-automator.png"
+                      alt="Accident Claims Intelligent Automator"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/30 to-transparent" />
+                    <div className="absolute top-4 right-4">
+                      <span className="text-xs text-electric font-medium px-3 py-1 rounded-full bg-navy/80 backdrop-blur-sm border border-electric/30">
+                        Claims Management
+                      </span>
+                    </div>
+                  </div>
+                  <CardHeader className="pb-2 pt-4">
+                    <CardTitle className="text-lg font-bold text-white group-hover:text-electric transition-colors">
+                      Accident Claims Intelligent Automator
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <p className="text-slate-text leading-relaxed text-sm">
+                      A 24/7 digital triage engine that transforms raw accident data into actionable revenue opportunities. Combines expert-level liability analysis with empathetic, instant communication to win the "Golden Hour" and prevent high-value claims from leaking to competitors.
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="text-xs text-slate-text px-2 py-1 rounded-md bg-white/5 border border-white/10">n8n</span>
+                      <span className="text-xs text-slate-text px-2 py-1 rounded-md bg-white/5 border border-white/10">GPT-4</span>
+                      <span className="text-xs text-slate-text px-2 py-1 rounded-md bg-white/5 border border-white/10">Zoho CRM</span>
+                      <span className="text-xs text-slate-text px-2 py-1 rounded-md bg-white/5 border border-white/10">Email</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </ScrollReveal>
+
+            {/* Connex-One Data Bridge */}
+            <ScrollReveal delay={0.1}>
+              <motion.div
+                whileHover={{ y: -5, transition: { duration: 0.3 } }}
+                className="h-full"
+              >
+                <Card className="h-full bg-navy/50 border border-white/10 backdrop-blur-sm hover:border-electric/30 transition-all duration-500 group overflow-hidden">
+                  <div className="relative h-56 overflow-hidden cursor-pointer" onClick={() => window.open('/images/n8n/connex-one-data-bridge.png', '_blank')}>
+                    <Image
+                      src="/images/n8n/connex-one-data-bridge.png"
+                      alt="Connex-One Data Bridge"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/30 to-transparent" />
+                    <div className="absolute top-4 right-4">
+                      <span className="text-xs text-electric font-medium px-3 py-1 rounded-full bg-navy/80 backdrop-blur-sm border border-electric/30">
+                        Contact Center
+                      </span>
+                    </div>
+                  </div>
+                  <CardHeader className="pb-2 pt-4">
+                    <CardTitle className="text-lg font-bold text-white group-hover:text-electric transition-colors">
+                      Connex-One Data Bridge
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <p className="text-slate-text leading-relaxed text-sm">
+                      A silent automation engine that eliminates the "morning reporting grind." Captures performance data from Connex-One, cleans it, and visualizes it in Google Sheets—reclaiming 30-60 minutes of supervisor time daily while ensuring 100% data integrity.
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="text-xs text-slate-text px-2 py-1 rounded-md bg-white/5 border border-white/10">n8n</span>
+                      <span className="text-xs text-slate-text px-2 py-1 rounded-md bg-white/5 border border-white/10">Connex-One</span>
+                      <span className="text-xs text-slate-text px-2 py-1 rounded-md bg-white/5 border border-white/10">Google Sheets</span>
+                      <span className="text-xs text-slate-text px-2 py-1 rounded-md bg-white/5 border border-white/10">Gmail</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </ScrollReveal>
+
+            {/* DocketLeads AI */}
+            <ScrollReveal delay={0.2}>
+              <motion.div
+                whileHover={{ y: -5, transition: { duration: 0.3 } }}
+                className="h-full"
+              >
+                <Card className="h-full bg-navy/50 border border-white/10 backdrop-blur-sm hover:border-electric/30 transition-all duration-500 group overflow-hidden">
+                  <div className="relative h-56 overflow-hidden cursor-pointer" onClick={() => window.open('/images/n8n/docketleads-ai.png', '_blank')}>
+                    <Image
+                      src="/images/n8n/docketleads-ai.png"
+                      alt="DocketLeads AI"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/30 to-transparent" />
+                    <div className="absolute top-4 right-4">
+                      <span className="text-xs text-electric font-medium px-3 py-1 rounded-full bg-navy/80 backdrop-blur-sm border border-electric/30">
+                        Document Processing
+                      </span>
+                    </div>
+                  </div>
+                  <CardHeader className="pb-2 pt-4">
+                    <CardTitle className="text-lg font-bold text-white group-hover:text-electric transition-colors">
+                      DocketLeads AI
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <p className="text-slate-text leading-relaxed text-sm">
+                      An intelligent document processing solution that automates extraction of high-value personal injury leads from handwritten towing dockets. Uses dual-engine OCR verification (OpenAI Vision + OCR.space) to read messy handwriting and digitize data in seconds via WhatsApp.
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="text-xs text-slate-text px-2 py-1 rounded-md bg-white/5 border border-white/10">n8n</span>
+                      <span className="text-xs text-slate-text px-2 py-1 rounded-md bg-white/5 border border-white/10">GPT-4o Vision</span>
+                      <span className="text-xs text-slate-text px-2 py-1 rounded-md bg-white/5 border border-white/10">WhatsApp</span>
+                      <span className="text-xs text-slate-text px-2 py-1 rounded-md bg-white/5 border border-white/10">Google Sheets</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </ScrollReveal>
+
+            {/* LedgerLens */}
+            <ScrollReveal delay={0.3}>
+              <motion.div
+                whileHover={{ y: -5, transition: { duration: 0.3 } }}
+                className="h-full"
+              >
+                <Card className="h-full bg-navy/50 border border-white/10 backdrop-blur-sm hover:border-electric/30 transition-all duration-500 group overflow-hidden">
+                  <div className="relative h-56 overflow-hidden cursor-pointer" onClick={() => window.open('/images/n8n/ledgerlens.png', '_blank')}>
+                    <Image
+                      src="/images/n8n/ledgerlens.png"
+                      alt="LedgerLens"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/30 to-transparent" />
+                    <div className="absolute top-4 right-4">
+                      <span className="text-xs text-electric font-medium px-3 py-1 rounded-full bg-navy/80 backdrop-blur-sm border border-electric/30">
+                        Accounting
+                      </span>
+                    </div>
+                  </div>
+                  <CardHeader className="pb-2 pt-4">
+                    <CardTitle className="text-lg font-bold text-white group-hover:text-electric transition-colors">
+                      LedgerLens
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <p className="text-slate-text leading-relaxed text-sm">
+                      An AI accounting gateway that transforms chaotic financial documents into structured, audit-ready data. Monitors invoices@ and receipts@ inboxes 24/7, extracts data using LLMs, converts emails to PDFs, and auto-files with intelligent naming—eliminating the "end-of-month receipt box."
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="text-xs text-slate-text px-2 py-1 rounded-md bg-white/5 border border-white/10">n8n</span>
+                      <span className="text-xs text-slate-text px-2 py-1 rounded-md bg-white/5 border border-white/10">OpenRouter AI</span>
+                      <span className="text-xs text-slate-text px-2 py-1 rounded-md bg-white/5 border border-white/10">Google Drive</span>
+                      <span className="text-xs text-slate-text px-2 py-1 rounded-md bg-white/5 border border-white/10">Google Sheets</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
