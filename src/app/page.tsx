@@ -348,6 +348,72 @@ export default function HomePage() {
                 </div>
               </div>
             </ScrollReveal>
+
+            {/* MealPrep.exe ERP System */}
+            <ScrollReveal delay={0.2}>
+              <div className="glass rounded-3xl p-8 md:p-12">
+                <div className="flex flex-wrap items-center gap-4 mb-8">
+                  <span className="px-4 py-1 bg-accent/20 text-accent rounded-full text-sm font-medium">
+                    Food Industry
+                  </span>
+                  <h3 className="text-3xl font-bold text-white">MealPrep.exe — ERP System</h3>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-8 mb-8">
+                  <div>
+                    <h4 className="text-lg font-semibold text-red-400 mb-2 flex items-center gap-2">
+                      <span>⚠️</span> The Problem
+                    </h4>
+                    <p className="text-gray-400">
+                      A meal prep business drowning in manual processes — handwritten orders, spreadsheet chaos, no nutritional tracking, and delivery routes planned by guesswork. Allergen risks and hours of wasted admin time.
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-semibold text-green-400 mb-2 flex items-center gap-2">
+                      <span>✅</span> The Solution
+                    </h4>
+                    <p className="text-gray-400">
+                      A complete ERP system built entirely in Google Sheets — CRM, automated recipe engineering with live nutritional analysis, production batch planning, and AI-powered delivery route optimization.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mb-8">
+                  <h4 className="text-lg font-semibold text-accent mb-3 flex items-center gap-2">
+                    <span>📈</span> Results
+                  </h4>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {['Zero manual route planning', 'Automated allergen safety', 'Live nutrition facts', 'Zero SaaS costs'].map((result, i) => (
+                      <div key={i} className="p-4 bg-green-500/10 border border-green-500/20 rounded-xl text-center">
+                        <span className="text-sm text-green-400">{result}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <h4 className="text-lg font-semibold text-white mb-4">Project Gallery</h4>
+                <div className="relative">
+                  <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent" style={{ width: 'calc(100% + 2rem)' }}>
+                    {[
+                      '/images/mealprep-exe/active-orders.jpg',
+                      '/images/mealprep-exe/recipe-page.jpg',
+                      '/images/mealprep-exe/nutritional-page.jpg',
+                      '/images/mealprep-exe/dispatch-page.jpg',
+                    ].map((src, i) => (
+                      <div key={i} className="relative flex-shrink-0 w-80 h-48 md:w-96 md:h-56 bg-card rounded-xl overflow-hidden group">
+                        <Image
+                          src={src}
+                          alt={`MealPrep.exe screenshot ${i + 1}`}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-center text-white/70 text-sm mt-2">← Scroll to see more →</p>
+                </div>
+              </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
