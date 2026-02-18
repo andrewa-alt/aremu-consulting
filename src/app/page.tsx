@@ -6,10 +6,10 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { MoveRight, ArrowDown, ExternalLink, Database, Workflow, BarChart3, Mail, Building2, Users } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { MoveRight, ArrowDown, Database, Workflow, BarChart3, Mail, Building2, Users, ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 // FAQ data
 const mockFAQ = [
@@ -19,7 +19,7 @@ const mockFAQ = [
   { q: "How can I get started?", a: "Simply fill out the enquiry form or email us at segun.a@aremuconsulting.com with your project details, and we'll schedule a consultation." },
 ];
 
-// Projects data - client-agnostic descriptions
+// Projects data - client-agnostic descriptions with all images
 const projects = [
   {
     title: "Lead Management Infrastructure",
@@ -29,7 +29,10 @@ const projects = [
     stats: "500+ leads/month",
     images: [
       "/images/cas-tracker/main-tracker.jpg",
-      "/images/cas-tracker/n8n-automation.png"
+      "/images/cas-tracker/n8n-automation.png",
+      "/images/cas-tracker/Agent personal tracker - Agent Input Page.jpg",
+      "/images/cas-tracker/Agent personal tracker - Leaderboard Page.jpg",
+      "/images/cas-tracker/n8n automation - takes email leads and uses AI to help parse html then writes cleaned lead data to sheets, triggers when an email is recieved.png"
     ]
   },
   {
@@ -40,7 +43,10 @@ const projects = [
     stats: "70% faster processing",
     images: [
       "/images/dashboard/dashboard-1.jpg",
-      "/images/dashboard/dashboard-2.jpg"
+      "/images/dashboard/dashboard-2.jpg",
+      "/images/dashboard/dash board now using google sheets as a back end 1-3.jpg",
+      "/images/dashboard/dash board now using google sheets as a back end 2-3.jpg",
+      "/images/dashboard/performance sheet before creatig app dashboard viewer pt 1-2.jpg"
     ]
   },
   {
@@ -51,7 +57,10 @@ const projects = [
     stats: "100+ orders/week",
     images: [
       "/images/mealprep-exe/active-orders-v2.jpg",
-      "/images/mealprep-exe/dispatch-page.jpg"
+      "/images/mealprep-exe/dispatch-page.jpg",
+      "/images/mealprep-exe/mealprep - Active orders page.jpg",
+      "/images/mealprep-exe/nutritional-page.jpg",
+      "/images/mealprep-exe/recipe-page.jpg"
     ]
   }
 ];
@@ -91,6 +100,191 @@ function ScrollReveal({ children, className, delay = 0 }: { children: React.Reac
     >
       {children}
     </motion.div>
+  );
+}
+
+// Lightbox Component
+function Lightbox({ images, currentIndex, isOpen, onClose, onNavigate }: {
+  images: string[];
+  currentIndex: number;
+  isOpen: boolean;
+  onClose: () => void;
+  onNavigate: (index: number) => void;
+}) {
+  if (!isOpen) return null;
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-navy/95 backdrop-blur-sm"
+          onClick={onClose}
+        >
+          {/* Close button */}
+          <button
+            onClick={onClose}
+            className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors z-50"
+          >
+            <X className="w-6 h-6 text-white" />
+          </button>
+
+          {/* Previous button */}
+          {images.length > 1 && (
+            <button
+              onClick={(e) => { e.stopPropagation(); onNavigate(currentIndex - 1 < 0 ? images.length - 1 : currentIndex - 1); }}
+              className="absolute left-6 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors z-50"
+            >
+              <ChevronLeft className="w-6 h-6 text-white" />
+            </button>
+          )}
+
+          {/* Next button */}
+          {images.length > 1 && (
+            <button
+              onClick={(e) => { e.stopPropagation(); onNavigate(currentIndex + 1 >= images.length ? 0 : currentIndex + 1); }}
+              className="absolute right-6 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors z-50"
+            >
+              <ChevronRight className="w-6 h-6 text-white" />
+            </button>
+          )}
+
+          {/* Image */}
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            className="relative max-w-[90vw] max-h-[85vh] w-full h-full flex items-center justify-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Image
+              src={images[currentIndex]}
+              alt="Project screenshot"
+              fill
+              className="object-contain"
+              sizes="90vw"
+              priority
+            />
+          </motion.div>
+
+          {/* Image counter */}
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full bg-white/10 text-white text-sm">
+            {currentIndex + 1} / {images.length}
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
+// Image Gallery Component
+function ImageGallery({ images, stats }: { images: string[]; stats: string }) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const scrollAmount = 200;
+      scrollRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const openLightbox = (index: number) => {
+    setCurrentImageIndex(index);
+    setLightboxOpen(true);
+  };
+
+  return (
+    <>
+      <div className="relative">
+        {/* Main featured image */}
+        <div 
+          className="relative h-48 overflow-hidden cursor-pointer group"
+          onClick={() => openLightbox(0)}
+        >
+          <Image
+            src={images[0]}
+            alt="Project screenshot"
+            fill
+            className="object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/30 to-transparent" />
+          {/* Click hint */}
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <span className="px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium">
+              Click to view
+            </span>
+          </div>
+        </div>
+
+        {/* Stats badge - moved below main image, right side */}
+        <div className="flex justify-end px-4 py-3 border-b border-white/5">
+          <span className="text-xs text-electric font-medium px-3 py-1.5 rounded-full bg-electric-dim border border-electric/20">
+            {stats}
+          </span>
+        </div>
+
+        {/* Thumbnail strip with scroll */}
+        {images.length > 1 && (
+          <div className="relative bg-navy/30">
+            {/* Left scroll button */}
+            <button
+              onClick={() => scroll('left')}
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-navy/80 hover:bg-electric/80 flex items-center justify-center transition-colors border border-white/10"
+            >
+              <ChevronLeft className="w-4 h-4 text-white" />
+            </button>
+
+            {/* Thumbnails */}
+            <div 
+              ref={scrollRef}
+              className="flex gap-2 overflow-x-auto scrollbar-hide px-10 py-3"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+              {images.map((img, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => openLightbox(idx)}
+                  className="relative flex-shrink-0 w-24 h-16 rounded-lg overflow-hidden border-2 border-transparent hover:border-electric transition-all group"
+                >
+                  <Image
+                    src={img}
+                    alt={`Screenshot ${idx + 1}`}
+                    fill
+                    className="object-cover"
+                    sizes="96px"
+                  />
+                  <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/20 transition-colors" />
+                </button>
+              ))}
+            </div>
+
+            {/* Right scroll button */}
+            <button
+              onClick={() => scroll('right')}
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-navy/80 hover:bg-electric/80 flex items-center justify-center transition-colors border border-white/10"
+            >
+              <ChevronRight className="w-4 h-4 text-white" />
+            </button>
+          </div>
+        )}
+      </div>
+
+      {/* Lightbox */}
+      <Lightbox
+        images={images}
+        currentIndex={currentImageIndex}
+        isOpen={lightboxOpen}
+        onClose={() => setLightboxOpen(false)}
+        onNavigate={setCurrentImageIndex}
+      />
+    </>
   );
 }
 
@@ -422,22 +616,10 @@ export default function HomePage() {
                   className="h-full"
                 >
                   <Card className="h-full bg-navy/50 border border-white/10 backdrop-blur-sm hover:border-electric/30 transition-all duration-500 group overflow-hidden">
-                    {/* Project Image */}
-                    <div className="relative h-48 overflow-hidden">
-                      <Image
-                        src={project.images[0]}
-                        alt={project.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/50 to-transparent" />
-                      <div className="absolute top-4 right-4">
-                        <span className="text-xs text-electric font-medium px-3 py-1 rounded-full bg-navy/80 backdrop-blur-sm border border-electric/30">
-                          {project.stats}
-                        </span>
-                      </div>
-                    </div>
-                    <CardHeader className="pb-2">
+                    {/* Image Gallery with Stats */}
+                    <ImageGallery images={project.images} stats={project.stats} />
+                    
+                    <CardHeader className="pb-2 pt-4">
                       <div className="flex items-start justify-between mb-3">
                         <motion.div 
                           className="w-10 h-10 rounded-lg bg-electric-dim flex items-center justify-center group-hover:bg-electric/20 transition-colors duration-500"
