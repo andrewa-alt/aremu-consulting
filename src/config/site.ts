@@ -9,8 +9,8 @@ export const siteConfig = {
   nav: {
     links: [
       { label: "Services", href: "#services" },
-      { label: "About", href: "#about" },
-      { label: "FAQ", href: "#faq" },
+      { label: "Process", href: "#process" },
+      { label: "Work", href: "#portfolio" },
       { label: "Contact", href: "#contact" },
     ],
     cta: { label: "Get Started", href: "#contact" },
