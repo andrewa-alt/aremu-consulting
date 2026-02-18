@@ -248,6 +248,49 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Tech Stack Section */}
+      <section id="tech-stack" className="py-16 bg-gradient-to-b from-dark via-card/20 to-dark border-y border-white/5">
+        <div className="container mx-auto px-6">
+          <ScrollReveal className="text-center mb-10">
+            <p className="text-sm uppercase tracking-widest text-gray-500 mb-2">Built With</p>
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
+              Enterprise-grade tools. Zero enterprise bloat.
+            </h2>
+          </ScrollReveal>
+
+          <ScrollReveal delay={0.1}>
+            <div className="flex flex-wrap justify-center items-center gap-4 md:gap-8">
+              {[
+                { name: 'Google Sheets', icon: '📊' },
+                { name: 'Apps Script', icon: '⚡' },
+                { name: 'Google APIs', icon: '🔌' },
+                { name: 'n8n', icon: '🔀' },
+                { name: 'React', icon: '⚛️' },
+                { name: 'Next.js', icon: '▲' },
+                { name: 'TypeScript', icon: '📘' },
+                { name: 'Tailwind CSS', icon: '🎨' },
+              ].map((tech, index) => (
+                <motion.div
+                  key={index}
+                  className="flex items-center gap-2 px-4 py-2 glass rounded-full"
+                  whileHover={{ scale: 1.05, backgroundColor: 'rgba(255,107,53,0.1)' }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <span className="text-lg">{tech.icon}</span>
+                  <span className="text-sm font-medium text-gray-300">{tech.name}</span>
+                </motion.div>
+              ))}
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal delay={0.2}>
+            <p className="text-center text-gray-500 text-sm mt-8 max-w-xl mx-auto">
+              No proprietary platforms. No vendor lock-in. You own the code, the data, and the infrastructure.
+            </p>
+          </ScrollReveal>
+        </div>
+      </section>
+
       {/* Portfolio / Case Studies Section */}
       <section id="portfolio" className="py-24 bg-gradient-to-b from-dark via-card/30 to-dark">
         <div className="container mx-auto px-6">
