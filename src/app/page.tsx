@@ -384,9 +384,12 @@ export default function HomePage() {
                       '/images/cas-tracker/Main Campaign Tracker - Leaderboard Page_ generates the leaderboard, agents personal tracker - leaderboard page is pulled directly from here.jpg',
                       '/images/cas-tracker/Main Campaign Tracker - Comms Page. used for payroll purposes to calculate commision to be payed to each agent.jpg',
                     ].map((src, i) => (
-                      <motion.div 
+                      <motion.a 
                         key={i} 
-                        className="relative flex-shrink-0 w-80 h-48 md:w-96 md:h-56 bg-card rounded-xl overflow-hidden group cursor-pointer"
+                        href={src}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="relative flex-shrink-0 w-80 h-48 md:w-96 md:h-56 bg-card rounded-xl overflow-hidden group cursor-pointer block"
                         whileHover={{ y: -8, boxShadow: '0 20px 40px rgba(255,107,53,0.15)' }}
                         transition={{ duration: 0.3 }}
                       >
@@ -399,7 +402,7 @@ export default function HomePage() {
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
                           <span className="px-4 py-2 bg-accent/90 rounded-full text-sm font-medium text-white">View Full Size</span>
                         </div>
-                      </motion.div>
+                      </motion.a>
                     ))}
                   </div>
                   <p className="text-center text-white/70 text-sm mt-2">← Scroll to see more →</p>
@@ -460,9 +463,12 @@ export default function HomePage() {
                       '/images/dashboard/performance sheet before creatig app dashboard viewer pt 1-2.jpg',
                       '/images/dashboard/performance sheet before creatig app dashboard viewer pt 2-2.jpg',
                     ].map((src, i) => (
-                      <motion.div 
+                      <motion.a 
                         key={i} 
-                        className="relative flex-shrink-0 w-80 h-48 md:w-96 md:h-56 bg-card rounded-xl overflow-hidden group cursor-pointer"
+                        href={src}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="relative flex-shrink-0 w-80 h-48 md:w-96 md:h-56 bg-card rounded-xl overflow-hidden group cursor-pointer block"
                         whileHover={{ y: -8, boxShadow: '0 20px 40px rgba(255,107,53,0.15)' }}
                         transition={{ duration: 0.3 }}
                       >
@@ -475,7 +481,7 @@ export default function HomePage() {
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
                           <span className="px-4 py-2 bg-accent/90 rounded-full text-sm font-medium text-white">View Full Size</span>
                         </div>
-                      </motion.div>
+                      </motion.a>
                     ))}
                   </div>
                   <p className="text-center text-white/70 text-sm mt-2">← Scroll to see more →</p>
@@ -534,9 +540,12 @@ export default function HomePage() {
                       '/images/mealprep-exe/nutritional-page.jpg',
                       '/images/mealprep-exe/dispatch-page.jpg',
                     ].map((src, i) => (
-                      <motion.div 
+                      <motion.a 
                         key={i} 
-                        className="relative flex-shrink-0 w-80 h-48 md:w-96 md:h-56 bg-card rounded-xl overflow-hidden group cursor-pointer"
+                        href={src}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="relative flex-shrink-0 w-80 h-48 md:w-96 md:h-56 bg-card rounded-xl overflow-hidden group cursor-pointer block"
                         whileHover={{ y: -8, boxShadow: '0 20px 40px rgba(255,107,53,0.15)' }}
                         transition={{ duration: 0.3 }}
                       >
@@ -549,7 +558,7 @@ export default function HomePage() {
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
                           <span className="px-4 py-2 bg-accent/90 rounded-full text-sm font-medium text-white">View Full Size</span>
                         </div>
-                      </motion.div>
+                      </motion.a>
                     ))}
                   </div>
                   <p className="text-center text-white/70 text-sm mt-2">← Scroll to see more →</p>
