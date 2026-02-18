@@ -200,6 +200,13 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Section Divider */}
+      <div className="relative h-24 overflow-hidden">
+        <svg className="absolute bottom-0 w-full h-24" viewBox="0 0 1440 96" preserveAspectRatio="none">
+          <path fill="rgba(255,107,53,0.05)" d="M0,64L48,58.7C96,53,192,43,288,48C384,53,480,75,576,80C672,85,768,75,864,64C960,53,1056,43,1152,48C1248,53,1344,75,1392,85.3L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+        </svg>
+      </div>
+
       {/* How I Work - Process Section */}
       <section id="process" className="py-24 relative">
         <div className="container mx-auto px-6">
@@ -248,6 +255,13 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Section Divider */}
+      <div className="relative h-16 overflow-hidden bg-gradient-to-b from-dark to-card/20">
+        <svg className="absolute bottom-0 w-full h-16" viewBox="0 0 1440 64" preserveAspectRatio="none">
+          <path fill="rgba(20,20,20,0.5)" d="M0,32L48,37.3C96,43,192,53,288,48C384,43,480,21,576,21.3C672,21,768,43,864,53.3C960,64,1056,64,1152,53.3C1248,43,1344,21,1392,10.7L1440,0L1440,64L1392,64C1344,64,1248,64,1152,64C1056,64,960,64,864,64C768,64,672,64,576,64C480,64,384,64,288,64C192,64,96,64,48,64L0,64Z"></path>
+        </svg>
+      </div>
+
       {/* Tech Stack Section */}
       <section id="tech-stack" className="py-16 bg-gradient-to-b from-dark via-card/20 to-dark border-y border-white/5">
         <div className="container mx-auto px-6">
@@ -290,6 +304,19 @@ export default function HomePage() {
           </ScrollReveal>
         </div>
       </section>
+
+      {/* Section Divider */}
+      <div className="relative h-16 overflow-hidden">
+        <svg className="absolute bottom-0 w-full h-16" viewBox="0 0 1440 64" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style={{stopColor:'rgba(255,107,53,0.1)', stopOpacity:1}} />
+              <stop offset="100%" style={{stopColor:'rgba(20,20,20,0.5)', stopOpacity:1}} />
+            </linearGradient>
+          </defs>
+          <path fill="url(#grad1)" d="M0,0L48,10.7C96,21,192,43,288,48C384,53,480,43,576,37.3C672,32,768,32,864,37.3C960,43,1056,53,1152,48C1248,43,1344,21,1392,10.7L1440,0L1440,64L1392,64C1344,64,1248,64,1152,64C1056,64,960,64,864,64C768,64,672,64,576,64C480,64,384,64,288,64C192,64,96,64,48,64L0,64Z"></path>
+        </svg>
+      </div>
 
       {/* Portfolio / Case Studies Section */}
       <section id="portfolio" className="py-24 bg-gradient-to-b from-dark via-card/30 to-dark">
@@ -357,14 +384,22 @@ export default function HomePage() {
                       '/images/cas-tracker/Main Campaign Tracker - Leaderboard Page_ generates the leaderboard, agents personal tracker - leaderboard page is pulled directly from here.jpg',
                       '/images/cas-tracker/Main Campaign Tracker - Comms Page. used for payroll purposes to calculate commision to be payed to each agent.jpg',
                     ].map((src, i) => (
-                      <div key={i} className="relative flex-shrink-0 w-80 h-48 md:w-96 md:h-56 bg-card rounded-xl overflow-hidden group">
+                      <motion.div 
+                        key={i} 
+                        className="relative flex-shrink-0 w-80 h-48 md:w-96 md:h-56 bg-card rounded-xl overflow-hidden group cursor-pointer"
+                        whileHover={{ y: -8, boxShadow: '0 20px 40px rgba(255,107,53,0.15)' }}
+                        transition={{ duration: 0.3 }}
+                      >
                         <Image
                           src={src}
                           alt={`Project screenshot ${i + 1}`}
                           fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-300"
+                          className="object-cover group-hover:scale-110 transition-transform duration-500"
                         />
-                      </div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
+                          <span className="px-4 py-2 bg-accent/90 rounded-full text-sm font-medium text-white">View Full Size</span>
+                        </div>
+                      </motion.div>
                     ))}
                   </div>
                   <p className="text-center text-white/70 text-sm mt-2">← Scroll to see more →</p>
@@ -425,14 +460,22 @@ export default function HomePage() {
                       '/images/dashboard/performance sheet before creatig app dashboard viewer pt 1-2.jpg',
                       '/images/dashboard/performance sheet before creatig app dashboard viewer pt 2-2.jpg',
                     ].map((src, i) => (
-                      <div key={i} className="relative flex-shrink-0 w-80 h-48 md:w-96 md:h-56 bg-card rounded-xl overflow-hidden group">
+                      <motion.div 
+                        key={i} 
+                        className="relative flex-shrink-0 w-80 h-48 md:w-96 md:h-56 bg-card rounded-xl overflow-hidden group cursor-pointer"
+                        whileHover={{ y: -8, boxShadow: '0 20px 40px rgba(255,107,53,0.15)' }}
+                        transition={{ duration: 0.3 }}
+                      >
                         <Image
                           src={src}
                           alt={`Project screenshot ${i + 1}`}
                           fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-300"
+                          className="object-cover group-hover:scale-110 transition-transform duration-500"
                         />
-                      </div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
+                          <span className="px-4 py-2 bg-accent/90 rounded-full text-sm font-medium text-white">View Full Size</span>
+                        </div>
+                      </motion.div>
                     ))}
                   </div>
                   <p className="text-center text-white/70 text-sm mt-2">← Scroll to see more →</p>
@@ -491,14 +534,22 @@ export default function HomePage() {
                       '/images/mealprep-exe/nutritional-page.jpg',
                       '/images/mealprep-exe/dispatch-page.jpg',
                     ].map((src, i) => (
-                      <div key={i} className="relative flex-shrink-0 w-80 h-48 md:w-96 md:h-56 bg-card rounded-xl overflow-hidden group">
+                      <motion.div 
+                        key={i} 
+                        className="relative flex-shrink-0 w-80 h-48 md:w-96 md:h-56 bg-card rounded-xl overflow-hidden group cursor-pointer"
+                        whileHover={{ y: -8, boxShadow: '0 20px 40px rgba(255,107,53,0.15)' }}
+                        transition={{ duration: 0.3 }}
+                      >
                         <Image
                           src={src}
                           alt={`MealPrep.exe screenshot ${i + 1}`}
                           fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-300"
+                          className="object-cover group-hover:scale-110 transition-transform duration-500"
                         />
-                      </div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
+                          <span className="px-4 py-2 bg-accent/90 rounded-full text-sm font-medium text-white">View Full Size</span>
+                        </div>
+                      </motion.div>
                     ))}
                   </div>
                   <p className="text-center text-white/70 text-sm mt-2">← Scroll to see more →</p>
@@ -508,6 +559,13 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Section Divider */}
+      <div className="relative h-20 overflow-hidden">
+        <svg className="absolute bottom-0 w-full h-20" viewBox="0 0 1440 80" preserveAspectRatio="none">
+          <path fill="rgba(255,107,53,0.03)" d="M0,40L48,45C96,50,192,60,288,55C384,50,480,30,576,30C672,30,768,50,864,60C960,70,1056,70,1152,60C1248,50,1344,30,1392,20L1440,10L1440,80L1392,80C1344,80,1248,80,1152,80C1056,80,960,80,864,80C768,80,672,80,576,80C480,80,384,80,288,80C192,80,96,80,48,80L0,80Z"></path>
+        </svg>
+      </div>
 
       {/* About Section */}
       <section id="about" className="py-24">
