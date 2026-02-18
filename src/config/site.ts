@@ -17,9 +17,9 @@ export const siteConfig = {
   },
   
   hero: {
-    badge: "B2B Systems & Infrastructure",
+    badge: "",
     title: "Aremu Consulting",
-    subtitle: "We build the critical systems that power your business. From marketing automation to process optimization—robust infrastructure for sustainable growth.",
+    subtitle: "Building systems that just work.",
     cta: { text: "Start a Project", href: "#contact" },
     secondaryCta: { text: "Our Services", href: "#services" },
   },

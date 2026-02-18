@@ -289,20 +289,38 @@ function ImageGallery({ images, stats }: { images: string[]; stats: string }) {
 }
 
 // Contact Form Component
+const industries = [
+  "Technology",
+  "Finance & Banking",
+  "Healthcare",
+  "Retail & E-commerce",
+  "Manufacturing",
+  "Logistics & Transportation",
+  "Real Estate",
+  "Legal Services",
+  "Marketing & Advertising",
+  "Education",
+  "Hospitality & Food",
+  "Construction",
+  "Consulting & Professional Services",
+  "Energy & Utilities",
+  "Non-profit",
+  "Other"
+];
+
 function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    company: '',
-    message: ''
+    industry: '',
+    issues: ''
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // For now, just open mailto with the form data
-    const subject = `Enquiry from ${formData.name} - ${formData.company}`;
-    const body = `Name: ${formData.name}\nEmail: ${formData.email}\nCompany: ${formData.company}\n\nMessage:\n${formData.message}`;
+    const subject = `Enquiry from ${formData.name} - ${formData.industry}`;
+    const body = `Name: ${formData.name}\nEmail: ${formData.email}\nIndustry: ${formData.industry}\n\nCurrent Issues:\n${formData.issues}`;
     window.location.href = `mailto:segun.a@aremuconsulting.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setSubmitted(true);
   };
@@ -346,23 +364,28 @@ function ContactForm() {
         </div>
       </div>
       <div>
-        <label className="block text-sm text-slate-text mb-2">Company</label>
-        <Input 
-          type="text"
-          placeholder="Your company name"
-          value={formData.company}
-          onChange={(e) => setFormData({...formData, company: e.target.value})}
-          className="bg-navy-light/50 border-white/10 text-white placeholder:text-slate-muted focus:border-electric"
-        />
+        <label className="block text-sm text-slate-text mb-2">Industry</label>
+        <select
+          required
+          value={formData.industry}
+          onChange={(e) => setFormData({...formData, industry: e.target.value})}
+          className="w-full h-12 rounded-lg border border-white/10 bg-navy-light/50 px-4 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric transition-colors appearance-none cursor-pointer"
+          style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2364FFDA' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 12px center', backgroundSize: '16px' }}
+        >
+          <option value="" disabled className="bg-navy text-slate-muted">Select your industry</option>
+          {industries.map((ind) => (
+            <option key={ind} value={ind} className="bg-navy text-white">{ind}</option>
+          ))}
+        </select>
       </div>
       <div>
-        <label className="block text-sm text-slate-text mb-2">Project Details</label>
+        <label className="block text-sm text-slate-text mb-2">Current Issues Being Faced</label>
         <Textarea 
           required
           rows={5}
-          placeholder="Tell us about your project, challenges, and goals..."
-          value={formData.message}
-          onChange={(e) => setFormData({...formData, message: e.target.value})}
+          placeholder="Describe the challenges or inefficiencies you're currently experiencing..."
+          value={formData.issues}
+          onChange={(e) => setFormData({...formData, issues: e.target.value})}
           className="bg-navy-light/50 border-white/10 text-white placeholder:text-slate-muted focus:border-electric resize-none"
         />
       </div>
@@ -460,12 +483,14 @@ export default function HomePage() {
           initial="hidden"
           animate="visible"
         >
-          {/* Badge */}
-          <motion.div variants={itemVariants}>
-            <span className="inline-block px-4 py-2 rounded-full glass text-sm font-medium text-electric mb-8 border border-electric/20">
-              {siteConfig.hero.badge}
-            </span>
-          </motion.div>
+          {/* Badge - only show if not empty */}
+          {siteConfig.hero.badge && (
+            <motion.div variants={itemVariants}>
+              <span className="inline-block px-4 py-2 rounded-full glass text-sm font-medium text-electric mb-8 border border-electric/20">
+                {siteConfig.hero.badge}
+              </span>
+            </motion.div>
+          )}
 
           {/* Main Title */}
           <motion.h1 
