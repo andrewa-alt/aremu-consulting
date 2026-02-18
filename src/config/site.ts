@@ -1,9 +1,9 @@
-import { Leaf, Zap, Shield } from "lucide-react";
+import { Zap, Settings, Shield } from "lucide-react";
 
 export const siteConfig = {
   name: "Aremu Consulting",
-  tagline: "Strategic Systems & Sustainable Growth",
-  description: "Building critical infrastructure and exploring forward-thinking ventures in agribusiness and technology.",
+  tagline: "Strategic Business Systems",
+  description: "Building critical infrastructure for B2B growth. Systems that scale, processes that deliver.",
   url: "https://aremuconsulting.com",
   
   nav: {
@@ -17,27 +17,27 @@ export const siteConfig = {
   },
   
   hero: {
-    badge: "Systems & Growth",
+    badge: "B2B Systems & Infrastructure",
     title: "Aremu Consulting",
-    subtitle: "Building critical infrastructure for businesses while exploring sustainable ventures in agribusiness and technology. Strategic systems meet visionary growth.",
+    subtitle: "We build the critical systems that power your business. From marketing automation to process optimization—robust infrastructure for sustainable growth.",
     cta: { text: "Start a Project", href: "#contact" },
-    secondaryCta: { text: "Learn More", href: "#about" },
+    secondaryCta: { text: "Our Services", href: "#services" },
   },
   
   features: [
     {
       title: "Systems Architecture",
-      description: "Design and implementation of robust infrastructure that keeps your business running smoothly.",
+      description: "Design and implementation of robust infrastructure that keeps your business running smoothly and scales with your growth.",
       icon: Zap,
     },
     {
-      title: "Agribusiness Ventures",
-      description: "Sustainable palm oil production and agricultural investments with long-term growth potential.",
-      icon: Leaf,
+      title: "Process Automation",
+      description: "Streamline operations with intelligent automation. Reduce manual work, eliminate errors, and free your team to focus on what matters.",
+      icon: Settings,
     },
     {
       title: "Strategic Security",
-      description: "Comprehensive approaches to data protection and business continuity planning.",
+      description: "Comprehensive approaches to data protection, compliance, and business continuity planning for peace of mind.",
       icon: Shield,
     },
   ],

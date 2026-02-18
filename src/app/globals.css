@@ -1,16 +1,20 @@
 @import "tailwindcss";
 
 /* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 /* CSS Variables for theming */
 :root {
-  --bg-primary: #0a0a0a;
-  --bg-secondary: #141414;
-  --text-primary: #fafafa;
-  --text-secondary: #a1a1a1;
-  --accent: #ff6b35;
-  --accent-hover: #ff8555;
+  /* New Aremu Consulting Brand Colors */
+  --bg-primary: #0A192F;
+  --bg-secondary: #112240;
+  --bg-tertiary: #1B2D4A;
+  --text-primary: #F8F9FA;
+  --text-secondary: #8892B0;
+  --text-muted: #5A6A8A;
+  --accent: #64FFDA;
+  --accent-hover: #4CD9B8;
+  --accent-dim: rgba(100, 255, 218, 0.1);
 }
 
 /* Grain texture overlay */
@@ -19,23 +23,23 @@
   position: fixed;
   inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  opacity: 0.04;
+  opacity: 0.03;
   pointer-events: none;
   z-index: 9999;
 }
 
-/* Gradient mesh background */
+/* Gradient mesh background - updated for navy palette */
 .gradient-mesh {
   background: 
-    radial-gradient(ellipse at 20% 30%, rgba(255, 107, 53, 0.15) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 70%, rgba(147, 51, 234, 0.1) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(255, 107, 53, 0.05) 0%, transparent 70%),
+    radial-gradient(ellipse at 20% 30%, rgba(100, 255, 218, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(17, 34, 64, 0.8) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(100, 255, 218, 0.03) 0%, transparent 70%),
     var(--bg-primary);
 }
 
 /* Apply base styles */
 body {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   background-color: var(--bg-primary);
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
@@ -43,8 +47,10 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-weight: 700;
   color: var(--text-primary);
+  letter-spacing: -0.02em;
 }
 
 /* Smooth transitions for interactive elements */
@@ -60,10 +66,10 @@ button, a, input, [role="button"], [role="link"] {
 
 @keyframes pulse-glow {
   0%, 100% { 
-    box-shadow: 0 0 20px rgba(255, 107, 53, 0.3), 0 0 40px rgba(255, 107, 53, 0.1);
+    box-shadow: 0 0 20px rgba(100, 255, 218, 0.3), 0 0 40px rgba(100, 255, 218, 0.1);
   }
   50% { 
-    box-shadow: 0 0 30px rgba(255, 107, 53, 0.5), 0 0 60px rgba(255, 107, 53, 0.2);
+    box-shadow: 0 0 30px rgba(100, 255, 218, 0.5), 0 0 60px rgba(100, 255, 218, 0.2);
   }
 }
 
@@ -122,22 +128,22 @@ button, a, input, [role="button"], [role="link"] {
   animation: reveal-scale 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Glass morphism */
+/* Glass morphism - updated */
 .glass {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(17, 34, 64, 0.7);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(100, 255, 218, 0.1);
 }
 
 .glass-strong {
-  background: rgba(20, 20, 20, 0.7);
+  background: rgba(11, 25, 47, 0.85);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(100, 255, 218, 0.15);
 }
 
-/* Gradient text */
+/* Gradient text - updated for electric blue accent */
 .gradient-text {
-  background: linear-gradient(135deg, #ff6b35 0%, #ff8555 50%, #ff6b35 100%);
+  background: linear-gradient(135deg, #64FFDA 0%, #4CD9B8 50%, #64FFDA 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -174,7 +180,7 @@ button, a, input, [role="button"], [role="link"] {
 .stagger-children.animate > *:nth-child(5) { animation-delay: 0.5s; }
 .stagger-children.animate > *:nth-child(6) { animation-delay: 0.6s; }
 
-/* Custom scrollbar */
+/* Custom scrollbar - updated */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -184,23 +190,26 @@ button, a, input, [role="button"], [role="link"] {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 107, 53, 0.3);
+  background: rgba(100, 255, 218, 0.2);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 107, 53, 0.5);
+  background: rgba(100, 255, 218, 0.4);
 }
 
 /* Custom theme configuration for Tailwind v4 */
 @theme {
-  --font-display: 'Cormorant Garamond', serif;
-  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   
-  /* Custom colors */
-  --color-accent: #ff6b35;
-  --color-primary: #0a0a0a;
-  --color-secondary: #141414;
+  /* Custom colors - Navy/Electric Blue theme */
+  --color-accent: #64FFDA;
+  --color-accent-hover: #4CD9B8;
+  --color-primary: #0A192F;
+  --color-secondary: #112240;
+  --color-tertiary: #1B2D4A;
+  --color-text-primary: #F8F9FA;
+  --color-text-secondary: #8892B0;
   
   /* Container */
   --container-center: true;
@@ -225,7 +234,7 @@ button, a, input, [role="button"], [role="link"] {
   to { height: 0; }
 }
 
-/* Geometric accent shapes */
+/* Geometric accent shapes - updated */
 .geometric-accent {
   position: relative;
 }
@@ -235,10 +244,22 @@ button, a, input, [role="button"], [role="link"] {
   position: absolute;
   width: 200px;
   height: 200px;
-  border: 1px solid rgba(255, 107, 53, 0.2);
+  border: 1px solid rgba(100, 255, 218, 0.15);
   border-radius: 50%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   pointer-events: none;
+}
+
+/* Logo container */
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-container img {
+  height: auto;
+  max-height: 48px;
+  width: auto;
 }

@@ -20,9 +20,24 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        display: ["'Cormorant Garamond'", "serif"],
-        body: ["'Plus Jakarta Sans'", "sans-serif"],
-        sans: ["'Plus Jakarta Sans'", ...fontFamily.sans],
+        sans: ['Inter', ...fontFamily.sans],
+      },
+      colors: {
+        // Aremu Consulting Brand Colors
+        navy: {
+          DEFAULT: '#0A192F',
+          light: '#112240',
+          lighter: '#1B2D4A',
+        },
+        electric: {
+          DEFAULT: '#64FFDA',
+          dark: '#4CD9B8',
+          dim: 'rgba(100, 255, 218, 0.1)',
+        },
+        slate: {
+          text: '#8892B0',
+          muted: '#5A6A8A',
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
