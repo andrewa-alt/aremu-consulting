@@ -19,28 +19,40 @@ const mockFAQ = [
   { q: "How can I get started?", a: "Simply fill out the enquiry form or email us at segun.a@aremuconsulting.com with your project details, and we'll schedule a consultation." },
 ];
 
-// Projects data
+// Projects data - client-agnostic descriptions
 const projects = [
   {
-    title: "Instant Marketing Infrastructure",
-    description: "Complete business system architecture for Australian accident management firm. Built CAStracker, agent dashboards, automated email pipelines, and real-time leaderboards.",
+    title: "Lead Management Infrastructure",
+    description: "End-to-end business system with automated lead intake, agent tracking dashboards, email automation, and real-time performance monitoring. Scaled to handle 500+ leads monthly.",
     tags: ["n8n", "Google Sheets", "Automation", "Dashboard"],
     icon: Workflow,
-    stats: "8 agents | 500+ leads/month"
+    stats: "500+ leads/month",
+    images: [
+      "/images/cas-tracker/main-tracker.jpg",
+      "/images/cas-tracker/n8n-automation.png"
+    ]
   },
   {
     title: "Claims Processing System",
-    description: "End-to-end claims tracking and management system with duplicate detection, rejection alerts, and performance analytics. Reduced manual processing by 70%.",
+    description: "Custom tracking system with automated data aggregation, duplicate detection, and performance alerts. Reduced manual processing time by 70%.",
     tags: ["Process Design", "Data Pipeline", "Alerts"],
     icon: Database,
-    stats: "70% faster processing"
+    stats: "70% faster processing",
+    images: [
+      "/images/dashboard/dashboard-1.jpg",
+      "/images/dashboard/dashboard-2.jpg"
+    ]
   },
   {
-    title: "Marketing Analytics Dashboard",
-    description: "Real-time performance tracking with automated reporting, conversion metrics, and team leaderboards. Leadership visibility into operations at a glance.",
-    tags: ["Analytics", "Visualization", "Reporting"],
+    title: "MealPrep OS",
+    description: "Order management system for meal prep business featuring active order tracking, dispatch coordination, recipe management, and nutritional data handling.",
+    tags: ["Next.js", "Order Management", "Inventory"],
     icon: BarChart3,
-    stats: "Real-time visibility"
+    stats: "100+ orders/week",
+    images: [
+      "/images/mealprep-exe/active-orders-v2.jpg",
+      "/images/mealprep-exe/dispatch-page.jpg"
+    ]
   }
 ];
 
@@ -410,19 +422,31 @@ export default function HomePage() {
                   className="h-full"
                 >
                   <Card className="h-full bg-navy/50 border border-white/10 backdrop-blur-sm hover:border-electric/30 transition-all duration-500 group overflow-hidden">
-                    <CardHeader className="pb-4">
-                      <div className="flex items-start justify-between mb-4">
-                        <motion.div 
-                          className="w-12 h-12 rounded-xl bg-electric-dim flex items-center justify-center group-hover:bg-electric/20 transition-colors duration-500"
-                          whileHover={{ scale: 1.1 }}
-                        >
-                          <project.icon className="w-6 h-6 text-electric" />
-                        </motion.div>
-                        <span className="text-xs text-electric font-medium px-2 py-1 rounded-full bg-electric-dim">
+                    {/* Project Image */}
+                    <div className="relative h-48 overflow-hidden">
+                      <Image
+                        src={project.images[0]}
+                        alt={project.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/50 to-transparent" />
+                      <div className="absolute top-4 right-4">
+                        <span className="text-xs text-electric font-medium px-3 py-1 rounded-full bg-navy/80 backdrop-blur-sm border border-electric/30">
                           {project.stats}
                         </span>
                       </div>
-                      <CardTitle className="text-xl font-bold text-white group-hover:text-electric transition-colors">
+                    </div>
+                    <CardHeader className="pb-2">
+                      <div className="flex items-start justify-between mb-3">
+                        <motion.div 
+                          className="w-10 h-10 rounded-lg bg-electric-dim flex items-center justify-center group-hover:bg-electric/20 transition-colors duration-500"
+                          whileHover={{ scale: 1.1 }}
+                        >
+                          <project.icon className="w-5 h-5 text-electric" />
+                        </motion.div>
+                      </div>
+                      <CardTitle className="text-lg font-bold text-white group-hover:text-electric transition-colors">
                         {project.title}
                       </CardTitle>
                     </CardHeader>
