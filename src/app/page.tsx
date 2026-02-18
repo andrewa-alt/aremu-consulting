@@ -1,21 +1,47 @@
 'use client';
 
 import { siteConfig } from '@/config/site';
-import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { MoveRight, ArrowDown } from 'lucide-react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { MoveRight, ArrowDown, ExternalLink, Database, Workflow, BarChart3, Mail, Building2, Users } from 'lucide-react';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { useState } from 'react';
 
 // FAQ data
 const mockFAQ = [
   { q: "What services does Aremu Consulting provide?", a: "We specialize in building and managing critical business systems, from marketing infrastructure to process automation. We help B2B clients optimize their operations with robust, scalable solutions." },
   { q: "Do you work with international clients?", a: "Yes, we work remotely with clients globally, particularly those needing robust systems and strategic infrastructure support." },
   { q: "What technologies do you use?", a: "We use modern tools including Next.js, React, n8n for automation, Google Workspace, and various cloud services tailored to each project's needs." },
-  { q: "How can I get started?", a: "Simply reach out via email at segun.a@aremuconsulting.com with your project details, and we'll schedule a consultation to discuss your needs." },
+  { q: "How can I get started?", a: "Simply fill out the enquiry form or email us at segun.a@aremuconsulting.com with your project details, and we'll schedule a consultation." },
+];
+
+// Projects data
+const projects = [
+  {
+    title: "Instant Marketing Infrastructure",
+    description: "Complete business system architecture for Australian accident management firm. Built CAStracker, agent dashboards, automated email pipelines, and real-time leaderboards.",
+    tags: ["n8n", "Google Sheets", "Automation", "Dashboard"],
+    icon: Workflow,
+    stats: "8 agents | 500+ leads/month"
+  },
+  {
+    title: "Claims Processing System",
+    description: "End-to-end claims tracking and management system with duplicate detection, rejection alerts, and performance analytics. Reduced manual processing by 70%.",
+    tags: ["Process Design", "Data Pipeline", "Alerts"],
+    icon: Database,
+    stats: "70% faster processing"
+  },
+  {
+    title: "Marketing Analytics Dashboard",
+    description: "Real-time performance tracking with automated reporting, conversion metrics, and team leaderboards. Leadership visibility into operations at a glance.",
+    tags: ["Analytics", "Visualization", "Reporting"],
+    icon: BarChart3,
+    stats: "Real-time visibility"
+  }
 ];
 
 // Animation variants
@@ -56,6 +82,95 @@ function ScrollReveal({ children, className, delay = 0 }: { children: React.Reac
   );
 }
 
+// Contact Form Component
+function ContactForm() {
+  const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    company: '',
+    message: ''
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // For now, just open mailto with the form data
+    const subject = `Enquiry from ${formData.name} - ${formData.company}`;
+    const body = `Name: ${formData.name}\nEmail: ${formData.email}\nCompany: ${formData.company}\n\nMessage:\n${formData.message}`;
+    window.location.href = `mailto:segun.a@aremuconsulting.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    setSubmitted(true);
+  };
+
+  if (submitted) {
+    return (
+      <div className="text-center py-12">
+        <div className="w-16 h-16 rounded-full bg-electric/20 flex items-center justify-center mx-auto mb-4">
+          <Mail className="w-8 h-8 text-electric" />
+        </div>
+        <h3 className="text-xl font-bold text-white mb-2">Message Sent!</h3>
+        <p className="text-slate-text">We'll get back to you within 24 hours.</p>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label className="block text-sm text-slate-text mb-2">Name</label>
+          <Input 
+            required
+            type="text"
+            placeholder="Your name"
+            value={formData.name}
+            onChange={(e) => setFormData({...formData, name: e.target.value})}
+            className="bg-navy-light/50 border-white/10 text-white placeholder:text-slate-muted focus:border-electric"
+          />
+        </div>
+        <div>
+          <label className="block text-sm text-slate-text mb-2">Email</label>
+          <Input 
+            required
+            type="email"
+            placeholder="you@company.com"
+            value={formData.email}
+            onChange={(e) => setFormData({...formData, email: e.target.value})}
+            className="bg-navy-light/50 border-white/10 text-white placeholder:text-slate-muted focus:border-electric"
+          />
+        </div>
+      </div>
+      <div>
+        <label className="block text-sm text-slate-text mb-2">Company</label>
+        <Input 
+          type="text"
+          placeholder="Your company name"
+          value={formData.company}
+          onChange={(e) => setFormData({...formData, company: e.target.value})}
+          className="bg-navy-light/50 border-white/10 text-white placeholder:text-slate-muted focus:border-electric"
+        />
+      </div>
+      <div>
+        <label className="block text-sm text-slate-text mb-2">Project Details</label>
+        <Textarea 
+          required
+          rows={5}
+          placeholder="Tell us about your project, challenges, and goals..."
+          value={formData.message}
+          onChange={(e) => setFormData({...formData, message: e.target.value})}
+          className="bg-navy-light/50 border-white/10 text-white placeholder:text-slate-muted focus:border-electric resize-none"
+        />
+      </div>
+      <Button 
+        type="submit"
+        size="lg" 
+        className="w-full bg-electric text-navy hover:bg-electric-dark py-6 text-lg font-semibold rounded-lg animate-pulse-glow"
+      >
+        Send Enquiry <MoveRight className="ml-2 h-5 w-5" />
+      </Button>
+    </form>
+  );
+}
+
 export default function HomePage() {
   return (
     <main className="grain gradient-mesh min-h-screen bg-[#0A192F]">
@@ -63,24 +178,29 @@ export default function HomePage() {
       <nav className="fixed top-0 left-0 right-0 z-50 glass-strong">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <a href="/" className="flex items-center">
-              <Image 
-                src="/logo-with-name.png" 
-                alt="Aremu Consulting" 
-                width={180} 
-                height={40}
-                className="h-10 w-auto"
-                priority
-              />
+            {/* Logo with white/light background to make it visible */}
+            <a href="/" className="flex items-center gap-3">
+              <div className="bg-white rounded-lg p-2 flex items-center justify-center">
+                <Image 
+                  src="/logo-icon.png" 
+                  alt="Aremu Consulting" 
+                  width={36} 
+                  height={36}
+                  className="h-9 w-9 object-contain"
+                  priority
+                />
+              </div>
+              <span className="font-bold text-white text-lg hidden sm:block">Aremu Consulting</span>
             </a>
             <div className="hidden md:flex items-center gap-8">
               <a href="#services" className="text-sm text-slate-text hover:text-electric transition-colors">Services</a>
+              <a href="#projects" className="text-sm text-slate-text hover:text-electric transition-colors">Projects</a>
               <a href="#about" className="text-sm text-slate-text hover:text-electric transition-colors">About</a>
               <a href="#faq" className="text-sm text-slate-text hover:text-electric transition-colors">FAQ</a>
               <Button 
                 asChild 
                 size="sm"
-                className="bg-transparent border border-electric text-electric hover:bg-electric-dim hover:text-electric"
+                className="bg-electric text-navy hover:bg-electric-dark font-semibold"
               >
                 <a href="#contact">Contact</a>
               </Button>
@@ -194,8 +314,8 @@ export default function HomePage() {
                 size="lg" 
                 className="text-electric border-electric/30 hover:bg-electric-dim hover:border-electric/50 px-8 py-6 text-lg rounded-lg backdrop-blur-sm"
               >
-                <a href={siteConfig.hero.secondaryCta.href}>
-                  {siteConfig.hero.secondaryCta.text}
+                <a href="#projects">
+                  View Projects
                 </a>
               </Button>
             </motion.div>
@@ -267,6 +387,68 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Projects Section */}
+      <section id="projects" className="py-24 md:py-32 relative bg-navy-light/30">
+        <div className="container mx-auto px-6">
+          <ScrollReveal className="text-center mb-16">
+            <span className="inline-block px-3 py-1 rounded-full glass text-xs font-medium text-electric mb-4 border border-electric/20 uppercase tracking-wider">
+              Our Work
+            </span>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              Featured Projects
+            </h2>
+            <p className="text-lg text-slate-text max-w-2xl mx-auto">
+              Real systems built for real businesses. Results that speak for themselves.
+            </p>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {projects.map((project, index) => (
+              <ScrollReveal key={index} delay={index * 0.1}>
+                <motion.div
+                  whileHover={{ y: -5, transition: { duration: 0.3 } }}
+                  className="h-full"
+                >
+                  <Card className="h-full bg-navy/50 border border-white/10 backdrop-blur-sm hover:border-electric/30 transition-all duration-500 group overflow-hidden">
+                    <CardHeader className="pb-4">
+                      <div className="flex items-start justify-between mb-4">
+                        <motion.div 
+                          className="w-12 h-12 rounded-xl bg-electric-dim flex items-center justify-center group-hover:bg-electric/20 transition-colors duration-500"
+                          whileHover={{ scale: 1.1 }}
+                        >
+                          <project.icon className="w-6 h-6 text-electric" />
+                        </motion.div>
+                        <span className="text-xs text-electric font-medium px-2 py-1 rounded-full bg-electric-dim">
+                          {project.stats}
+                        </span>
+                      </div>
+                      <CardTitle className="text-xl font-bold text-white group-hover:text-electric transition-colors">
+                        {project.title}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <p className="text-slate-text leading-relaxed text-sm">
+                        {project.description}
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {project.tags.map((tag, tagIndex) => (
+                          <span 
+                            key={tagIndex}
+                            className="text-xs text-slate-text px-2 py-1 rounded-md bg-white/5 border border-white/10"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* About Section */}
       <section id="about" className="py-24 md:py-32 relative overflow-hidden">
         <div className="container mx-auto px-6">
@@ -286,9 +468,25 @@ export default function HomePage() {
               <p className="text-lg text-slate-text mb-6 leading-relaxed">
                 We build the infrastructure that powers your business. From marketing automation to process optimization, we deliver systems that are robust, scalable, and strategically aligned with your goals.
               </p>
-              <p className="text-base text-slate-text leading-relaxed">
+              <p className="text-base text-slate-text leading-relaxed mb-8">
                 Our approach combines technical depth with business acumen. We don't just implement tools—we architect solutions that become competitive advantages.
               </p>
+              
+              {/* Stats */}
+              <div className="grid grid-cols-3 gap-6">
+                <div>
+                  <div className="text-3xl font-bold text-electric">5+</div>
+                  <div className="text-sm text-slate-text">Years Experience</div>
+                </div>
+                <div>
+                  <div className="text-3xl font-bold text-electric">50+</div>
+                  <div className="text-sm text-slate-text">Systems Built</div>
+                </div>
+                <div>
+                  <div className="text-3xl font-bold text-electric">99%</div>
+                  <div className="text-sm text-slate-text">Uptime</div>
+                </div>
+              </div>
             </motion.div>
 
             <motion.div
@@ -316,8 +514,8 @@ export default function HomePage() {
                   transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
                   style={{ width: '360px', height: '360px', top: '-40px', left: '-40px' }}
                 />
-                {/* Logo */}
-                <div className="relative w-72 h-72 rounded-full bg-navy-light flex items-center justify-center backdrop-blur-sm border border-electric/20">
+                {/* Logo with white background */}
+                <div className="relative w-72 h-72 rounded-full bg-white flex items-center justify-center backdrop-blur-sm border-4 border-electric/30 shadow-2xl shadow-electric/20">
                   <Image 
                     src="/logo-icon.png" 
                     alt="Aremu Consulting" 
@@ -372,35 +570,68 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="py-24 md:py-32 relative">
+      {/* Contact Section with Form */}
+      <section id="contact" className="py-24 md:py-32 relative bg-navy-light/30">
         <div className="container mx-auto px-6">
-          <ScrollReveal className="text-center max-w-2xl mx-auto">
-            <span className="inline-block px-3 py-1 rounded-full glass text-xs font-medium text-electric mb-4 border border-electric/20 uppercase tracking-wider">
-              Get In Touch
-            </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Ready to Build?
-            </h2>
-            <p className="text-lg text-slate-text mb-10">
-              Let's discuss how we can optimize your systems and accelerate your growth.
-            </p>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-              className="inline-block"
-            >
-              <Button 
-                asChild 
-                size="lg" 
-                className="bg-electric text-navy hover:bg-electric-dark px-10 py-6 text-lg font-semibold rounded-lg animate-pulse-glow"
-              >
-                <a href="mailto:segun.a@aremuconsulting.com">
-                  Start a Conversation <MoveRight className="ml-2 h-5 w-5" />
-                </a>
-              </Button>
-            </motion.div>
-          </ScrollReveal>
+          <div className="max-w-4xl mx-auto">
+            <ScrollReveal className="text-center mb-12">
+              <span className="inline-block px-3 py-1 rounded-full glass text-xs font-medium text-electric mb-4 border border-electric/20 uppercase tracking-wider">
+                Get In Touch
+              </span>
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+                Ready to Build?
+              </h2>
+              <p className="text-lg text-slate-text max-w-2xl mx-auto">
+                Let's discuss how we can optimize your systems and accelerate your growth.
+              </p>
+            </ScrollReveal>
+
+            <ScrollReveal delay={0.2}>
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
+                {/* Contact Info */}
+                <div className="md:col-span-2 space-y-6">
+                  <div className="glass rounded-xl p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 rounded-lg bg-electric-dim flex items-center justify-center">
+                        <Mail className="w-5 h-5 text-electric" />
+                      </div>
+                      <div>
+                        <div className="text-sm text-slate-text">Email</div>
+                        <a href="mailto:segun.a@aremuconsulting.com" className="text-white hover:text-electric transition-colors">
+                          segun.a@aremuconsulting.com
+                        </a>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 rounded-lg bg-electric-dim flex items-center justify-center">
+                        <Building2 className="w-5 h-5 text-electric" />
+                      </div>
+                      <div>
+                        <div className="text-sm text-slate-text">Company</div>
+                        <span className="text-white">Aremu Consulting Ltd</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-electric-dim flex items-center justify-center">
+                        <Users className="w-5 h-5 text-electric" />
+                      </div>
+                      <div>
+                        <div className="text-sm text-slate-text">Clients</div>
+                        <span className="text-white">B2B & Enterprise</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Contact Form */}
+                <div className="md:col-span-3">
+                  <div className="glass rounded-xl p-8">
+                    <ContactForm />
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
         </div>
       </section>
 
@@ -409,14 +640,16 @@ export default function HomePage() {
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <Image 
-                src="/logo-icon.png" 
-                alt="Aremu Consulting" 
-                width={32} 
-                height={32}
-                className="w-8 h-8"
-              />
-              <span className="text-slate-text text-sm">Aremu Consulting</span>
+              <div className="bg-white rounded p-1">
+                <Image 
+                  src="/logo-icon.png" 
+                  alt="Aremu Consulting" 
+                  width={24} 
+                  height={24}
+                  className="w-6 h-6 object-contain"
+                />
+              </div>
+              <span className="text-slate-text text-sm">Aremu Consulting Ltd</span>
             </div>
             <p className="text-slate-muted text-sm">© 2026 Aremu Consulting. All rights reserved.</p>
           </div>
